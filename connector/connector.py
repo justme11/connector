@@ -15,12 +15,18 @@ FTRACK_CONNECTED = True
 
 
 class Connector(object):
-    """docstring for Connector"""
+    """Class for Connector
+    Args:
+    user(Optional[str]): user name,and user system username if None
+    """
     def __init__(self, user=None):
         super(Connector, self).__init__()
         
         self.user = user
         self.userDetails = None
+        self.userTasks = None
+
+
         if not self.user:
             self.user = os.environ['USERNAME']
 
@@ -40,4 +46,10 @@ class Connector(object):
 
         self.userDetails = ftrack.getUser(self.user)
         return self.userDetails
-    
+
+    def getUserTasks(self):
+
+        userDetail = self.getUserDetails()
+
+        self.user Tasks = userDetail.getUserTasks()
+        return self.userTasks
